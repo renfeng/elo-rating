@@ -1,0 +1,289 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>work.fair24.elo</groupId>
+	<artifactId>elo-rating</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<packaging>pom</packaging>
+
+	<name>elo-rating</name>
+
+	<description></description>
+
+	<url>https://github.com/renfeng/elo-rating</url>
+
+	<developers>
+		<developer>
+			<id>+FrankR</id>
+			<name>Frank R.</name>
+			<email>renfeng.cn@gmail.com</email>
+			<url>https://plus.google.com/+FrankR</url>
+			<organization></organization>
+			<organizationUrl></organizationUrl>
+			<timezone>+8</timezone>
+			<roles>
+				<role>Developer</role>
+			</roles>
+		</developer>
+	</developers>
+
+	<scm>
+		<connection>
+			scm:git:https://github.com/renfeng/elo-rating/commit/${buildNumber}
+		</connection>
+	</scm>
+
+	<!-- suppresses Implementation-Vendor -->
+	<!-- https://maven.apache.org/shared/maven-archiver/examples/manifest.html -->
+	<!--<organization>
+		<name></name>
+		<url></url>
+	</organization>-->
+
+	<prerequisites>
+		<maven>3.0</maven>
+	</prerequisites>
+
+	<build>
+		<defaultGoal>install</defaultGoal>
+
+		<pluginManagement>
+			<plugins>
+
+				<!-- phase: validate -->
+				<plugin>
+					<artifactId>maven-help-plugin</artifactId>
+					<version>2.2</version>
+					<executions>
+						<execution>
+							<phase>validate</phase>
+							<goals>
+								<goal>active-profiles</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>versions-maven-plugin</artifactId>
+					<version>2.4</version>
+					<executions>
+						<execution>
+							<phase>validate</phase>
+							<goals>
+								<goal>display-dependency-updates</goal>
+								<goal>display-plugin-updates</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>buildnumber-maven-plugin</artifactId>
+					<version>1.4</version>
+					<executions>
+						<execution>
+							<phase>validate</phase>
+							<goals>
+								<goal>create</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<!-- <format>{0}</format> <items> <item></item> </items> -->
+						<!-- <doUpdate>true</doUpdate> -->
+						<!-- <scmDirectory>..</scmDirectory> -->
+						<!-- <doCheck>true</doCheck> -->
+						<!--<doCheck>${maven.buildNumber.doCheck}</doCheck>-->
+						<shortRevisionLength>7</shortRevisionLength>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<version>1.8</version>
+				</plugin>
+
+				<!-- phase: generate-resources -->
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>exec-maven-plugin</artifactId>
+					<!-- 1.6.0 works with cygwin-bower combination -->
+					<version>1.6.0</version>
+				</plugin>
+
+				<!-- phase: compile -->
+
+				<!-- phase: process-classes -->
+
+				<!-- phase: process-test-classes -->
+
+				<!-- phase: test -->
+				<plugin>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.20</version>
+					<configuration>
+						<skipTests>true</skipTests>
+					</configuration>
+				</plugin>
+
+				<!-- phase: prepare-package -->
+
+				<!-- phase: package -->
+				<plugin>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>3.0.2</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-shade-plugin</artifactId>
+					<version>3.0.0</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>3.1.0</version>
+				</plugin>
+
+				<!-- phase: pre-integration-test -->
+
+				<!-- phase: install -->
+
+				<!-- phase: deploy -->
+
+				<!-- phase: clean -->
+
+				<!-- phase: site -->
+
+				<!-- phase: invoked manually -->
+				<plugin>
+					<groupId>org.apache.tomcat.maven</groupId>
+					<artifactId>tomcat6-maven-plugin</artifactId>
+					<version>2.2</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.tomcat.maven</groupId>
+					<artifactId>tomcat7-maven-plugin</artifactId>
+					<version>2.2</version>
+				</plugin>
+				<plugin>
+					<groupId>org.eclipse.jetty</groupId>
+					<artifactId>jetty-maven-plugin</artifactId>
+					<version>9.4.6.v20170531</version>
+				</plugin>
+
+			</plugins>
+		</pluginManagement>
+
+		<plugins>
+			<plugin>
+				<artifactId>maven-help-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>buildnumber-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<!-- http://www.avajava.com/tutorials/lessons/how-do-i-display-the-value-of-a-property.html -->
+						<phase>validate</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<echo>Displaying value of a property</echo>
+								<echo>[project.scm.connection] ${project.scm.connection}</echo>
+							</target>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+
+	</build>
+
+	<modules>
+		<!--<module>web</module>-->
+		<module>cli</module>
+	</modules>
+
+	<dependencyManagement>
+		<dependencies>
+
+			<dependency>
+				<groupId>work.fair24.elo</groupId>
+				<artifactId>elo-rating-cli</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.velocity</groupId>
+				<artifactId>velocity</artifactId>
+				<version>1.7</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.velocity</groupId>
+				<artifactId>velocity-tools</artifactId>
+				<version>2.0</version>
+			</dependency>
+
+			<!-- framework -->
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>servlet-api</artifactId>
+				<version>2.5</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.google.inject.extensions</groupId>
+				<artifactId>guice-servlet</artifactId>
+				<version>4.1.0</version>
+			</dependency>
+			<dependency>
+				<groupId>com.google.inject</groupId>
+				<artifactId>guice</artifactId>
+				<version>4.1.0</version>
+			</dependency>
+
+			<!-- logging -->
+
+			<!-- testing -->
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.12</version>
+				<scope>test</scope>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
+	<properties>
+
+		<maven.buildNumber.doCheck>false</maven.buildNumber.doCheck>
+
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+
+		<!-- mvn test -Dmaven.test.skip=false -Dtest=TestClass#testMethod -->
+		<!-- https://maven.apache.org/surefire/maven-surefire-plugin/examples/single-test.html -->
+		<!-- https://maven.apache.org/surefire/maven-surefire-plugin/examples/skipping-test.html -->
+		<maven.test.skip>true</maven.test.skip>
+
+		<!-- <encoding>UTF-8</encoding> -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+	</properties>
+
+</project>

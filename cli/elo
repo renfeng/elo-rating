@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# http://stackoverflow.com/questions/805701/load-java-util-logging-config-file-for-default-initialization
+# https://docs.oracle.com/javase/8/docs/technotes/tools/windows/classpath.html#A1100762
+java -Djava.util.logging.config.file=logging.properties -cp classes:classes/*:lib:lib/* work.fair24.elo.Cli $*

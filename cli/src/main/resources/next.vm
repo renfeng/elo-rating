@@ -1,0 +1,9 @@
+## a list of suggested next matches
+#foreach($mapEntry in $next.entrySet())
+#set($player = $mapEntry.key)
+#set($playerNext = $mapEntry.value)
+${player.name}, $numberTool.format("#0", ${player.rating})
+Next: #foreach($n in $playerNext)${n.name}#if(${foreach.count} != $playerNext.size()), #end#end
+
+
+#end
