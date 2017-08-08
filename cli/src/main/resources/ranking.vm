@@ -1,4 +1,4 @@
 ## a list of players sorted by score, their ranking (position in the list) and their number of wins and losses
 #foreach($player in $ranking)
-${foreach.count} - ${player.name}, $numberTool.format("#0", ${player.rating}): ${player.wins.size()} wins, ${player.losses.size()} losses
+${foreach.count} - ${player.id}, ${player.name}, $numberTool.format("#0", ${player.rating}): ${player.wins.size()} wins, ${player.losses.size()} losses
 #end

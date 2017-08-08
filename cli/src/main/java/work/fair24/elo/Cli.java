@@ -69,7 +69,7 @@ public class Cli {
 			/*
 			 * a list of suggested next matches
 			 */
-			Map<Player, List<Player>> next = new HashMap<>();
+			SortedMap<Player, List<Player>> next = new TreeMap<>(Comparator.comparingInt(Player::getId));
 			for (Player player : players.values()) {
 				List<Player> playerNext = new ArrayList<>(players.values());
 				playerNext.removeAll(player.getWins());

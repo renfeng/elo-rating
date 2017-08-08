@@ -1,5 +1,5 @@
 ## a report for each person, showing with whom they played and how they fared
-${player.name}, $numberTool.format("#0", ${player.rating})
+${player.id}, ${player.name}, $numberTool.format("#0", ${player.rating})
 Wins: #foreach($win in $player.wins)${win.name}#if(${foreach.count} != $player.wins.size()), #end#end
 
 Losses: #foreach($loss in $player.losses)${loss.name}#if(${foreach.count} != $player.losses.size()), #end#end
