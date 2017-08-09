@@ -1,0 +1,19 @@
+{
+  "name": "elo-rating",
+  "version": "0.0.0",
+  "authors": [
+    "Frank R. <renfeng.cn@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^2.0.0"
+  }
+}

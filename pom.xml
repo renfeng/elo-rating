@@ -213,7 +213,7 @@
 	</build>
 
 	<modules>
-		<!--<module>web</module>-->
+		<module>web</module>
 		<module>cli</module>
 	</modules>
 

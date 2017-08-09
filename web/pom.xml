@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<!-- TODO merge with the jar project, which will be available as a standalone -->
+
+	<parent>
+		<groupId>work.fair24.elo</groupId>
+		<artifactId>elo-rating</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>work.fair24.elo</groupId>
+	<artifactId>elo-rating-web</artifactId>
+
+	<packaging>war</packaging>
+
+	<scm>
+		<connection>
+			scm:git:https://github.com/renfeng/elo-rating/commit/${buildNumber}
+		</connection>
+	</scm>
+
+	<build>
+		<defaultGoal>compile prepare-package tomcat6:run-war-only</defaultGoal>
+		<!--<defaultGoal>compile jetty:run-exploded</defaultGoal>-->
+		<outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory>
+		<finalName>ROOT</finalName>
+		<plugins>
+
+			<!-- phase: validate -->
+
+			<!-- phase: generate-resources -->
+
+			<!-- phase: compile -->
+
+			<!-- phase: process-classes -->
+
+			<!-- phase: test -->
+
+			<!-- phase: prepare-package -->
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+						</manifest>
+						<manifestEntries>
+							<Implementation-Build>${buildNumber}</Implementation-Build>
+
+							<!-- overrides the value of ${project.groupId} -->
+							<!-- https://maven.apache.org/shared/maven-archiver/examples/manifest.html -->
+							<Implementation-Vendor-Id>frren</Implementation-Vendor-Id>
+
+							<Built-By>Frank R.</Built-By>
+						</manifestEntries>
+					</archive>
+					<webResources>
+						<resource>
+							<directory>src/main/webapp</directory>
+							<filtering>true</filtering>
+							<includes>
+								<include>WEB-INF/web.xml</include>
+								<include>elements/*</include>
+							</includes>
+						</resource>
+					</webResources>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>exploded</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>bower-install</id>
+						<phase>prepare-package</phase>
+						<configuration>
+							<executable>bower</executable>
+							<arguments>
+								<argument>install</argument>
+							</arguments>
+							<workingDirectory>${project.build.directory}/${project.build.finalName}</workingDirectory>
+						</configuration>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+					</execution>
+					<!--<execution>
+						<id>polybuild</id>
+						<phase>prepare-package</phase>
+						<configuration>
+							<executable>polybuild</executable>
+							<arguments>
+								<argument>&#45;&#45;maximum-crush</argument>
+								<argument>index.html</argument>
+							</arguments>
+							<workingDirectory>${project.build.directory}/${project.build.finalName}</workingDirectory>
+						</configuration>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+					</execution>-->
+				</executions>
+			</plugin>
+
+			<!-- phase: package -->
+
+			<!-- phase: pre-integration-test -->
+
+			<!-- phase: invoked manually -->
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat6-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>run-war-only</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<path>${context}</path>
+
+					<!-- http://tomcat.apache.org/maven-plugin-2.0/tomcat6-maven-plugin/run-war-only-mojo.html -->
+					<!-- <port>8080</port> -->
+					<ajpPort>8009</ajpPort>
+					<!-- <httpsPort>8443</httpsPort> -->
+
+					<uriEncoding>UTF-8</uriEncoding>
+
+					<!-- https://issues.apache.org/jira/browse/MTOMCAT-175 -->
+					<warDirectory>${project.build.directory}/${project.build.finalName}</warDirectory>
+
+					<!-- tomcat6:exploded -->
+					<!-- https://tomcat.apache.org/maven-plugin-trunk/tomcat6-maven-plugin/examples/deployment.html#Deploying_an_exploded_WAR_directory -->
+					<!-- add to CATALINA_HOME/conf/tomcat-users.xml -->
+					<!-- <user username="admin" password="admin" roles="manager-script"/> -->
+					<username>admin</username>
+					<password>admin</password>
+
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>run-war-only</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+
+					<path>${context}</path>
+
+					<!-- <port>8080</port> -->
+					<ajpPort>8009</ajpPort>
+					<!-- <httpsPort>8443</httpsPort> -->
+
+					<uriEncoding>UTF-8</uriEncoding>
+
+					<!-- https://issues.apache.org/jira/browse/MTOMCAT-175 -->
+					<warDirectory>${project.build.directory}/${project.build.finalName}</warDirectory>
+
+					<!-- this doesn't work: tomcat7:deploy-only -->
+					<!-- https://tomcat.apache.org/maven-plugin-trunk/tomcat7-maven-plugin/deploy-mojo.html -->
+					<!-- add to CATALINA_HOME/conf/tomcat-users.xml -->
+					<!-- <user username="admin" password="admin" roles="manager-script"/> -->
+					<username>admin</username>
+					<password>admin</password>
+
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<configuration>
+					<stopPort>9966</stopPort>
+					<stopKey>foo</stopKey>
+					<stopWait>10</stopWait>
+					<webApp>
+						<contextPath>${context}</contextPath>
+					</webApp>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>work.fair24.elo</groupId>
+			<artifactId>elo-rating-cli</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.inject.extensions</groupId>
+			<artifactId>guice-servlet</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+		</dependency>
+
+		<!-- testing -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+
+	</dependencies>
+
+	<properties>
+		<!-- a trailing slash doesn't work with tomcat plugin, except when
+		it's ROOT. but, a single slash results in double slashes at the beginning of path -->
+		<context>/</context>
+		<api-path>/api</api-path>
+	</properties>
+
+</project>
