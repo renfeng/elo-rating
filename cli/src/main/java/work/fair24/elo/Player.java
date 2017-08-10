@@ -15,8 +15,8 @@ public class Player {
 	private final List<Player> draws = new ArrayList<>();
 
 	public Player(double rating, double kFactor) {
-		this.rating = rating;
-		this.kFactor = kFactor;
+		setRating(rating);
+		setkFactor(kFactor);
 	}
 
 	public int getId() {

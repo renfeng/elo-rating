@@ -5,7 +5,6 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
-import org.apache.velocity.tools.generic.EscapeTool;
 import org.apache.velocity.tools.generic.NumberTool;
 
 import java.io.IOException;
@@ -19,7 +18,7 @@ public class Cli {
 
 	public static void main(String... args) throws IOException {
 
-		if (args.length < 2) {
+		if (args.length < 2 || args.length > 3) {
 			throw new IllegalArgumentException();
 		}
 

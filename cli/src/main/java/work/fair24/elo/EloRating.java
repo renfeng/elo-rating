@@ -39,9 +39,6 @@ public class EloRating {
 			playerA.getLosses().add(playerB);
 			playerB.getWins().add(playerA);
 		} else {
-			/*
-			 * this is an enhancement
-			 */
 			playerA.getDraws().add(playerB);
 			playerB.getDraws().add(playerA);
 		}
