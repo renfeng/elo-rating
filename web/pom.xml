@@ -228,7 +228,6 @@
 		<!-- a trailing slash doesn't work with tomcat plugin, except when
 		it's ROOT. but, a single slash results in double slashes at the beginning of path -->
 		<context>/</context>
-		<api-path>/api</api-path>
 	</properties>
 
 </project>
