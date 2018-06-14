@@ -125,9 +125,6 @@
 				<plugin>
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>2.20</version>
-					<configuration>
-						<skipTests>true</skipTests>
-					</configuration>
 				</plugin>
 
 				<!-- phase: prepare-package -->
@@ -231,11 +228,6 @@
 				<artifactId>velocity</artifactId>
 				<version>1.7</version>
 			</dependency>
-			<dependency>
-				<groupId>org.apache.velocity</groupId>
-				<artifactId>velocity-tools</artifactId>
-				<version>2.0</version>
-			</dependency>
 
 			<!-- framework -->
 			<dependency>
@@ -247,12 +239,12 @@
 			<dependency>
 				<groupId>com.google.inject.extensions</groupId>
 				<artifactId>guice-servlet</artifactId>
-				<version>4.1.0</version>
+				<version>4.2.0</version>
 			</dependency>
 			<dependency>
 				<groupId>com.google.inject</groupId>
 				<artifactId>guice</artifactId>
-				<version>4.1.0</version>
+				<version>4.2.0</version>
 			</dependency>
 
 			<!-- logging -->

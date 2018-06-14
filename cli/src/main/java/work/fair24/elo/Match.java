@@ -1,6 +1,6 @@
 package work.fair24.elo;
 
-public class EloRating {
+public class Match {
 
 	/*
 	 * for each 400 rating points of advantage over the opponent, the expected score is magnified ten times in
@@ -9,7 +9,19 @@ public class EloRating {
 	public static final double RATING_POINTS = 400;
 	public static final double MAGNIFIED = 10;
 
-	public void match(Player playerA, double scoreA, Player playerB, double scoreB) {
+	private final Player playerA;
+	private final Player playerB;
+	private final double scoreA;
+	private final double scoreB;
+
+	public Match(Player playerA, double scoreA, Player playerB, double scoreB) {
+		this.playerA = playerA;
+		this.playerB = playerB;
+		this.scoreA = scoreA;
+		this.scoreB = scoreB;
+	}
+
+	public void applyEloRating() {
 
 		/*
 		 * https://en.wikipedia.org/wiki/Elo_rating_system#Mathematical_details
